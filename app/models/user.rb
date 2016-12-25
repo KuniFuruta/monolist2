@@ -34,28 +34,28 @@ class User < ActiveRecord::Base
 
   ## TODO 実装
   def have(item)
-    have_relationships.find_or_create_by(have_id: item.id)
+    haves.find_or_create_by(item_id: item.id)
   end
 
   def unhave(item)
-    have_relationship = have_relationships.find_by(have_id: item.id)
-    have_relationship.destroy if have_relationship
+    have = haves.find_by(item_id: item.id)
+    have.destroy if have
   end
 
   def have?(item)
-    have_users.include?(item)
+    have_items.include?(item)
   end
 
   def want(item)
-    want_relationships.find_or_create_by(want_id: item.id)
+    wants.find_or_create_by(item_id: item.id)
   end
 
   def unwant(item)
-    want_relationship = want_relationships.find_by(want_id: item.id)
-    want_relationship.destroy if want_relationship
+    want = wants.find_by(item_id: item.id)
+    want.destroy if want
   end
 
   def want?(item)
-    want_users.include?(item)
+    want_items.include?(item)
   end
 end
